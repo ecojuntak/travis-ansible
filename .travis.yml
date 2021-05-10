@@ -16,8 +16,7 @@ install:
 jobs:
   include:
   - stage: deploy-stagiong
-    script: cd ansible && ansible-playbook -i inventory.staging.yml playbook.yml --private-key
-      ../nci-key.pem -u $ANSIBLE_USER -s
+    script: cd ansible && ansible-playbook -i inventory.staging.yml playbook.yml --private-key ~/.ssh/id_rsa -u $ANSIBLE_USER -s
 
 addons:
   ssh_known_hosts:
