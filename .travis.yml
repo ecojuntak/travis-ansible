@@ -16,7 +16,7 @@ install:
 jobs:
   include:
   - stage: deploy-stagiong
-    script: ansible-playbook -i ansible/inventory.staging.yml  ansible/playbook.yml --user $ANSIBLE_USER --private-key ~/.ssh/id_rsa
+    script: chmod 400 ~/.ssh/id_rsa && ansible-playbook -i ansible/inventory.staging.yml  ansible/playbook.yml --user $ANSIBLE_USER --private-key ~/.ssh/id_rsa
 
 addons:
   ssh_known_hosts:
