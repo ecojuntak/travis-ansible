@@ -1,23 +1,23 @@
 language: python
 
 python:
-  - "2.7"
+- '2.7'
 
 branches:
   only:
   - master
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_bc4ab20c2dda_key -iv $encrypted_bc4ab20c2dda_iv -in nci-key.pem.enc -out nci-key.pem -d
-  - chmod 600 nci-key.pem
+- openssl aes-256-cbc -K $encrypted_577a66393eac_key -iv $encrypted_577a66393eac_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
 
 install:
-  - pip install ansible
+- pip install ansible
 
 jobs:
   include:
-    - stage: deploy-stagiong
-      script: cd ansible && ansible-playbook -i inventory.staging.yml playbook.yml --private-key ../nci-key.pem -u $ANSIBLE_USER -s
+  - stage: deploy-stagiong
+    script: cd ansible && ansible-playbook -i inventory.staging.yml playbook.yml --private-key
+      ../nci-key.pem -u $ANSIBLE_USER -s
 
 addons:
   ssh_known_hosts:
@@ -25,5 +25,4 @@ addons:
 
 env:
   global:
-  - secure: "qHZ4n4DAqe+3UkfuQBPMDqthgHjHZf53kWNZU1tO5csmScsoYnoOg3Qq3Y60tBjQ+ENEI04b3flNRo+rGA6swSV4rXv0LhRgCkPyxXhzUmTjgcAc4uF+5dlKfbwUXqy55pIi0nqphlJhnHoHRLDMvxkatuzxoUJk0pLeYcq/Daw="
-  - secure: "sIgtRon6w5MSnUOjQQ9Ce7qdfp/HVrpXuIZEVfcFi9E4bn2XA/8Tw7bZSFL+mazK6x8B+qrpLIRCD+Tlyto1BbbYOYqOJKEA7jNgKalyGwI551Eh0ATk10MhrW9s9i2b1mkstMRdtpQf1zL1MGXlXLSUeQUi8Rs+vZCNs8KUmaU="
+    secure: v5ndr5tro46RhGD07sc/Vg1cp0FReyu1k4S5HEDqRReZu98l40LCUKxChvrJyjc/9GEkjrVbDvAZqH9R7lZiSzsh7kTZPoNx3Fe0Ms+vH5vzFiZERkkaJD6Nf0K+sTzBiLL/Gelpvt5vtAXTs5zrb13f6TRPT2oRImJlXCvPc1i0ceTCqAVB95or4NzELwQKLUEFwOsaYRCGZ815jF4qUcVB1/b6jhT/p4SrSc24SlDD05ZGItzIBXRi4PodrzF7vPvbuMDNingMY9Py3s0qfIxm2YbjAdPFUFXGmzsFqM4GEOw+PDT4eK/s4J3ruWl98FmJ9DQciBNR6TcnybWjCJrzSTL9O67fl0GAA3IqAHHVHVLHfyJ/f2Hw1aJekFU5LpKHFUzQ3trsw0UeRvsmz4dNyE+7XIgIFExvq5YQf6gQCSfpNhoDSlg4eAgdkqxHyVR3lNqln1+eAjv3iB3QDYIf8JNMAGljtmntG1ORYh0NGElmwRqgLzSkiqy5CB2kOMfKn1uhjVsPj95mtP8KOfHuQifRoKWSimXjXxY3umwCB0C1HkxfvxyV76qUnSVxup0SjpeOCPDJ1ir9s2H/DoUy9JfryX1DknS6MyfuzjCqqb0axZpqS2ESmTOk+JfMKD7/c1fhX8Vys2oyTx3Oo7maRNGqQW7C7YNEXB7mbKs=
