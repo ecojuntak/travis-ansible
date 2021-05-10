@@ -21,7 +21,7 @@ jobs:
 
 addons:
   ssh_known_hosts:
-  - 130.56.244.8
+  - 34.101.105.129
 
 env:
   global:
