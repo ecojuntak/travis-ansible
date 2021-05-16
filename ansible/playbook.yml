@@ -21,7 +21,9 @@
       shell: cp travis-ansible/ruby-app.service /etc/systemd/system
 
     - name: Run app
+      become: yes
       ansible.builtin.systemd:
         state: started
+        daemon_reload: yes
         name: ruby-app
 
