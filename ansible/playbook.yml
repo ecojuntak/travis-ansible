@@ -1,10 +1,27 @@
 - hosts: all
   tasks:
-    - name: Download node setup script
-      get_url:
-        url: https://deb.nodesource.com/setup_12.x
-        dest: /tmp/node_setup.sh
-        mode: '0755'
-    - name: Execute node setup script
+    - name: Install ruby
       become: yes
-      command: bash /tmp/node_setup.sh
+      apt:
+        name: ruby
+        state: present
+
+    - name: Install sinatra
+      become: yes
+      shell: gem install sinatra
+
+    - name: Clean up existing app
+      shell: rm -rf travis-ansible
+
+    - name: Download app
+      shell: git clone https://github.com/ecojuntak/travis-ansible.git
+
+    - name: Copy service file
+      become: yes
+      shell: cp travis-ansible/ruby-app.service /etc/systemd/system
+
+    - name: Run app
+      ansible.builtin.systemd:
+        state: started
+        name: ruby-app
+

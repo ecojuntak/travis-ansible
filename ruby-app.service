@@ -1,0 +1,11 @@
+[Unit]
+Description=Run sinatra app
+
+[Service]
+User=vagrant
+WorkingDirectory=/home/vagrant
+ExecStart=/usr/bin/ruby travis-ansible/index.rb -o 0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
