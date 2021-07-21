@@ -1,5 +1,11 @@
 - hosts: all
   tasks:
+    - name: Install git
+      become: yes
+      apt:
+        name: git
+        state: present
+
     - name: Install ruby
       become: yes
       apt:
