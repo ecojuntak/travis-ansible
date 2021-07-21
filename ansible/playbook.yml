@@ -29,7 +29,6 @@
     - name: Run app
       become: yes
       ansible.builtin.systemd:
-        state: started
+        state: reloaded
         daemon_reload: yes
         name: ruby-app
-
