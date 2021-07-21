@@ -8,7 +8,8 @@ branches:
   - master
 
 before_install:
-- openssl aes-256-cbc -K $encrypted_577a66393eac_key -iv $encrypted_577a66393eac_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- openssl aes-256-cbc -K $encrypted_b7014b0dabac_key -iv $encrypted_b7014b0dabac_iv -in id_rsa_personal.enc -out ~/.ssh/id_rsa_personal -d
+- chmod 400 ~/.ssh/id_rsa_personal
 
 install:
 - pip install ansible
@@ -16,12 +17,8 @@ install:
 jobs:
   include:
   - stage: deploy-staging
-    script: chmod 400 ~/.ssh/id_rsa && ansible-playbook -i ansible/inventory.staging.yml  ansible/playbook.yml --user $ANSIBLE_USER --private-key ~/.ssh/id_rsa
+    script: ansible-playbook -i ansible/inventory.staging.yml ansible/playbook.yml --user $ANSIBLE_USER --private-key ~/.ssh/id_rsa_personal
 
 addons:
   ssh_known_hosts:
-  - 34.101.105.129
-
-env:
-  global:
-    secure: v5ndr5tro46RhGD07sc/Vg1cp0FReyu1k4S5HEDqRReZu98l40LCUKxChvrJyjc/9GEkjrVbDvAZqH9R7lZiSzsh7kTZPoNx3Fe0Ms+vH5vzFiZERkkaJD6Nf0K+sTzBiLL/Gelpvt5vtAXTs5zrb13f6TRPT2oRImJlXCvPc1i0ceTCqAVB95or4NzELwQKLUEFwOsaYRCGZ815jF4qUcVB1/b6jhT/p4SrSc24SlDD05ZGItzIBXRi4PodrzF7vPvbuMDNingMY9Py3s0qfIxm2YbjAdPFUFXGmzsFqM4GEOw+PDT4eK/s4J3ruWl98FmJ9DQciBNR6TcnybWjCJrzSTL9O67fl0GAA3IqAHHVHVLHfyJ/f2Hw1aJekFU5LpKHFUzQ3trsw0UeRvsmz4dNyE+7XIgIFExvq5YQf6gQCSfpNhoDSlg4eAgdkqxHyVR3lNqln1+eAjv3iB3QDYIf8JNMAGljtmntG1ORYh0NGElmwRqgLzSkiqy5CB2kOMfKn1uhjVsPj95mtP8KOfHuQifRoKWSimXjXxY3umwCB0C1HkxfvxyV76qUnSVxup0SjpeOCPDJ1ir9s2H/DoUy9JfryX1DknS6MyfuzjCqqb0axZpqS2ESmTOk+JfMKD7/c1fhX8Vys2oyTx3Oo7maRNGqQW7C7YNEXB7mbKs=
+  - 34.101.175.131
